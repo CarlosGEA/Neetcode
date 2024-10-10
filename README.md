@@ -1,2 +1,2 @@
-# Neetcode-
+# Neetcode
 Coding exercises
