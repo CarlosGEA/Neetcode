@@ -1,6 +1,7 @@
 """
 Difficulty : Easy
 Date created : 10-10-2024
+Status - Optimal
 """
 
 class Solution:
