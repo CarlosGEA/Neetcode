@@ -1,14 +1,24 @@
 """
 Difficulty : Medium
-Date created : 15-10-2024
+Date created : 17-10-2024
 """
 
 
 class Solution:
     def productExceptSelf(self, nums: list[int]) -> list[int]:
-        # Use only preffix and suffix
+        n = len(nums)
+        left = nums[0]
+        res = [1] * n
+        for i in range(1, n):
+            res[i] *= left # =
+            left *= nums[i]      
         
-        return
+        right = nums[-1]
+        for i in range(n - 2, -1, -1):
+            res[i] *= right
+            right *= nums[i]
+
+        return res
 
 
 def main():

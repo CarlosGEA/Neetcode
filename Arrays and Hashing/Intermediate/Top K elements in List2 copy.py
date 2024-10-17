@@ -1,6 +1,6 @@
 """
 Difficulty : Medium
-Date created : 14-10-2024
+Date created : -10-2024
 """
 
 

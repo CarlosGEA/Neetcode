@@ -10,7 +10,6 @@ class Solution:
     def encode(self, strs: list[str]) -> str:
         # Encode using number and #
         encoded = ""
-
         for s in strs:
             encoded += str(len(s)) + "#" + s
         return encoded
@@ -18,16 +17,15 @@ class Solution:
     def decode(self, s: str) -> list[str]:
         # Decode when finding # and length of string before that
         decoded = []
-        start = 0
+        start = end = 0
         while start < len(s):
             end = start
             while s[end] != "#":
                 end += 1
-            length = int(s[start:end])
-            start = end + 1
-            end = start + length
-            decoded.append(s[start:end])
-            start = end
+            length = int(s[start : end])
+            decoded.append(s[end + 1 : end + 1 + length])
+            start = end + 1 + length
+
         return decoded
 
 

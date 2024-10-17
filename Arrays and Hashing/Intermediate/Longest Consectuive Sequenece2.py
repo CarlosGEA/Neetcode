@@ -1,6 +1,6 @@
 """
 Difficulty : Medium
-Date created : 15-10-2024
+Date created : 17-10-2024
 """
 
 
@@ -8,7 +8,19 @@ class Solution:
     def longestConsectuive(self, nums: list[int]) -> int:
        # Either work with furthest left going up
        # Use purely maps
-       return
+        max_seq = 0
+        for i in nums:
+            start = i + 1
+
+            if i - 1 not in nums:
+                while start in nums:
+                    start += 1
+
+            max_seq = max(max_seq, start - i)
+
+        return max_seq
+
+
 
 def main():
 
