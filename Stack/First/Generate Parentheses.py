@@ -7,7 +7,7 @@ import time
 t0 = time.time()
 
 class Solution:
-    def generateParenthesis(self, n: int) -> list[str]:
+    def generateParentheses(self, n: int) -> list[str]:
         bracket = "()"
         res = {"()"}
         for _ in range(2, n + 1):
@@ -24,7 +24,7 @@ def main():
     solution = Solution()
 
     n = 10
-    ans = solution.generateParenthesis(n)
+    ans = solution.generateParentheses(n)
     print(f"From {n} brackets we can make {len(ans)}")
 
     return None
