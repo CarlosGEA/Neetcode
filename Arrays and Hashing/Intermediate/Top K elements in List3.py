@@ -1,15 +1,28 @@
 """
 Difficulty : Medium
-Date created : 18-10-2024
+Date created : 19-10-2024
 """
 
 
 class Solution:
     def topKFrequent(self, nums: list[int], k: int) -> list[int]:
-        # Bucket sort or another form of heap
-        # Don't use counter
 
-        return 
+        count = {}
+        for n in nums:
+            count[n] = count.get(n, 0) + 1
+
+        freq = [[] for _ in range(len(nums) + 1)]
+        for num, cnt in count.items():
+            freq[cnt].append(num)
+            
+        
+        res = []
+        for idx in range(len(freq) - 1, -1, -1):
+            for n in freq[idx]:
+                res.append(n)
+                if len(res) == k:
+                    return res
+        return None
         
 
 def main():
