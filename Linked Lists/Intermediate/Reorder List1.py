@@ -1,9 +1,9 @@
 """
 Difficulty : Medium
-Date created : 25-10-2024
+Date created : 2-10-2024
 """
 
-
+# Slow and Fast pointer --- change above kflasfjalk
 def listToArr(head):
     current = head
     arr = []
@@ -24,37 +24,7 @@ class Solution:
 
     def reorderList(self, head: ListNode | None) -> None:
 
-        slow = head
-        fast = head.next
-
-        while fast and fast.next:
-            slow = slow.next
-            fast = fast.next.next
-        
-        second = slow.next
-        prev = slow.next = None
-
-        while second:
-            temp = second.next
-            second.next = prev
-            prev = second
-            second = temp
-
-
-        second = prev #  New head of second half of the list
-        first = head
-
-        while second:
-            tmp1 = first.next
-            tmp2 = second.next
-
-            first.next = second
-            second.next = tmp1
-
-            first = tmp1
-            second = tmp2
-
-        return head
+        return
 
 
 def arrayToList(arr):

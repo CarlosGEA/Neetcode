@@ -13,8 +13,28 @@ class ListNode:
 
 class Solution:
     def removeNthFromEnd(self, head: ListNode | None, n: int) -> ListNode | None:
+        res = head
 
-        return
+        end = head
+        jump = -1
+        while end:
+            end = end.next
+            jump += 1
+
+        start = head
+
+        if jump - n < 0:
+            res = head.next
+            start.next = None
+        else:
+            start = head
+
+            while jump - n > 0:
+                jump -= 1
+                start = start.next
+
+            start.next = start.next.next
+        return res
 
 
 def arrayToList(arr):
@@ -43,13 +63,20 @@ def main():
 
     solution = Solution()
 
-    head = [0, 1, 2, 3]
+    head = [1, 2, 3, 4]
+    n = 2
     head_ll = arrayToList(head)
-    print(f"The reversed linked list is {printLinkedList(solution.reverseList(head_ll))}")
+    print(f"The new list is {printLinkedList(solution.removeNthFromEnd(head_ll, n))}")
 
-    head = []
+    head = [5]
+    n = 1
     head_ll = arrayToList(head)
-    print(f"The reversed linked list is {printLinkedList(solution.reverseList(head_ll))}")
+    print(f"The new linked list is {printLinkedList(solution.removeNthFromEnd(head_ll, n))}")
+
+    head = [1, 2]
+    n = 2
+    head_ll = arrayToList(head)
+    print(f"The new linked list is {printLinkedList(solution.removeNthFromEnd(head_ll, n))}")
 
     return None
 
