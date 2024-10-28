@@ -1,3 +1,9 @@
+"""
+Difficulty : Easy
+Date created : 28-10-2024
+"""
+
+
 class ListNode:
     def __init__(self, val=0, next=None):
         self.val = val
@@ -7,7 +13,16 @@ class ListNode:
 class Solution:
     def reverseList(self, head: ListNode | None) -> ListNode | None:
 
-        return
+        curr = head
+        prev = None
+        while curr:
+            next_node = curr.next
+            curr.next = prev
+
+            prev = curr
+            curr = next_node
+
+        return prev
 
 
 def arrayToList(arr):
@@ -45,3 +60,7 @@ def main():
     print(f"The reversed linked list is {printLinkedList(solution.reverseList(head_ll))}")
 
     return None
+
+
+if __name__ == "__main__":
+    main()
