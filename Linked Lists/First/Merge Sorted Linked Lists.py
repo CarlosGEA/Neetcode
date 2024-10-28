@@ -4,7 +4,7 @@ Date created : 25-10-2024
 """
 # Use dummy
 
-def printLinkedList(head):
+def listToArr(head):
     current = head
     arr = []
     while current:
@@ -46,8 +46,8 @@ class Solution:
                 curr1 = curr1.next
             else:
                 curr1 = curr1.next
-            # print(printLinkedList(curr1))
-            # print(printLinkedList(curr2))
+            # print(listToArr(curr1))
+            # print(listToArr(curr2))
 
         if curr2 is not None:
             curr1.next = curr2
@@ -74,25 +74,25 @@ def main():
     # list1 = [1, 2, 4]
     # list2 = [1, 3, 5]
     # print(
-    #     f"The head of the sorted linked list is {printLinkedList(solution.mergeTwoLists(arrayToList(list1), arrayToList(list2)))}"
+    #     f"The head of the sorted linked list is {listToArr(solution.mergeTwoLists(arrayToList(list1), arrayToList(list2)))}"
     # )
 
     # list1 = []
     # list2 = [1, 2]
     # print(
-    #     f"The head of the sorted linked list is {printLinkedList(solution.mergeTwoLists(arrayToList(list1), arrayToList(list2)))}"
+    #     f"The head of the sorted linked list is {listToArr(solution.mergeTwoLists(arrayToList(list1), arrayToList(list2)))}"
     # )
 
     # list1 = []
     # list2 = []
     # print(
-    #     f"The head of the sorted linked list is {printLinkedList(solution.mergeTwoLists(arrayToList(list1), arrayToList(list2)))}"
+    #     f"The head of the sorted linked list is {listToArr(solution.mergeTwoLists(arrayToList(list1), arrayToList(list2)))}"
     # )
 
     list1=[-10,-9,-6,-4,1,9,9]
     list2=[-5,-3,0,7,8,8]
     print(
-        f"The head of the sorted linked list is {printLinkedList(solution.mergeTwoLists(arrayToList(list1), arrayToList(list2)))}"
+        f"The head of the sorted linked list is {listToArr(solution.mergeTwoLists(arrayToList(list1), arrayToList(list2)))}"
     )
 
 

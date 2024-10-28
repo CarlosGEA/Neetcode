@@ -40,7 +40,7 @@ def arrayToList(arr):
     return head
 
 
-def printLinkedList(head):
+def listToArr(head):
     current = head
     arr = []
     while current:
@@ -54,11 +54,11 @@ def main():
 
     head = [0, 1, 2, 3]
     head_ll = arrayToList(head)
-    print(f"The reversed linked list is {printLinkedList(solution.reverseList(head_ll))}")
+    print(f"The reversed linked list is {listToArr(solution.reverseList(head_ll))}")
 
     head = []
     head_ll = arrayToList(head)
-    print(f"The reversed linked list is {printLinkedList(solution.reverseList(head_ll))}")
+    print(f"The reversed linked list is {listToArr(solution.reverseList(head_ll))}")
 
     return None
 
