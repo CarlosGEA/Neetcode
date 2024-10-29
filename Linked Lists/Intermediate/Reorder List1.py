@@ -1,9 +1,8 @@
 """
 Difficulty : Medium
-Date created : 2-10-2024
+Date created : 29-10-2024
 """
 
-# Slow and Fast pointer --- change above kflasfjalk
 def listToArr(head):
     current = head
     arr = []
@@ -23,8 +22,33 @@ class ListNode:
 class Solution:
 
     def reorderList(self, head: ListNode | None) -> None:
+        slow = head
+        fast = head
 
-        return
+        while fast and fast.next:
+            slow = slow.next
+            fast = fast.next.next
+
+        curr = slow
+        prev = None
+        while curr:
+            next_node = curr.next
+            curr.next = prev
+
+            prev = curr
+            curr = next_node
+
+        node = dummy = ListNode()
+        while head.next:
+            node.next = head
+            head = head.next
+            node = node.next
+            node.next = prev
+            prev = prev.next
+            node = node.next
+
+
+        return dummy.next
 
 
 def arrayToList(arr):
@@ -46,11 +70,11 @@ def main():
 
     head = [2, 4, 6, 8]
     head_ll = arrayToList(head)
-    print(f"The reversed linked list is {print(listToArr(solution.reorderList(head_ll)))}")
+    print(f"The reversed linked list is {(listToArr(solution.reorderList(head_ll)))}")
 
     head = [2, 4, 6, 8, 10]
     head_ll = arrayToList(head)
-    print(f"The reversed linked list is {print(listToArr(solution.reorderList(head_ll)))}")
+    print(f"The reversed linked list is {(listToArr(solution.reorderList(head_ll)))}")
 
     return None
 
