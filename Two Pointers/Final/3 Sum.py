@@ -1,14 +1,31 @@
 """
 Difficulty : Medium
-Date created : -10-2024
+Date created : 31-10-2024
 """
 
 
 class Solution:
     def threeSum(self, nums: list[int]) -> list[list[int]]:
 
+        res = set()
+        nums.sort()
 
-        return
+        for i, num in enumerate(nums):
+
+            l = i + 1
+            r = len(nums) - 1
+
+            while l < r:
+                numsum = num + nums[l] + nums[r]
+                if numsum == 0:
+                    res.add(tuple([nums[l], num, nums[r]]))
+
+                if numsum > 0:
+                    r -= 1
+                else:
+                    l += 1
+
+        return [list(i) for i in res]
 
 
 def main():

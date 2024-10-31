@@ -2,7 +2,6 @@
 Difficulty : Easy
 Date created : 25-10-2024
 """
-# Use dummy
 
 def listToArr(head):
     current = head
