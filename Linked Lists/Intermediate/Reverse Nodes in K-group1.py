@@ -1,7 +1,7 @@
 """
 Difficulty : Hard
 Date created : 03-11-2024
-Date completed :
+New Attempt :
 """
 
 
@@ -15,36 +15,7 @@ class ListNode:
 class Solution:
     def reverseKGroup(self, head: ListNode | None, k: int) -> ListNode | None:
 
-        dummy = ListNode(0, head)
-        groupPrev = dummy
-        while True:
-
-            kth = self.getKth(groupPrev, k)
-            if not kth:
-                break
-
-            groupNext = kth.next
-
-            prev, curr = kth.next, groupPrev.next           
-            while curr != groupNext:
-                next_node = curr.next
-                curr.next = prev
-
-                prev = curr
-                curr = next_node
-
-            next_node = groupPrev.next
-            groupPrev.next = kth
-            groupPrev = next_node
-
-        return dummy.next
-    
-    def getKth(self, curr, k):
-        while curr and k > 0:
-            curr = curr.next
-            k -= 1
-        return curr
-
+      return
 
 def arrayToList(arr):
     if not arr:

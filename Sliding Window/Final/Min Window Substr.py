@@ -1,40 +1,39 @@
 """
 Difficulty : Hard
-Date created : -11-2024
+Date created : 04-11-2024
 """
 
+from collections import defaultdict
 
-# Complexity -- Time: O(n  * m), Space: O(m)
-# n - len(s), m - len(t)
+
 class Solution:
     def minWindow(self, s: str, t: str) -> str:
-        res = ""
-
         if len(t) > len(s):
-            return res
+            return ""
 
-        charMapT = {}
-        charMapS = {}
+        charS = defaultdict(int)
+        charT = defaultdict(int)
+        for c in t:
+            charT[c] += 1
 
-        for c in range(len(t)):
-            charMapT[t[c]] = charMapT.get(t[c], 0) + 1
-
-        matches = 0
+        res = ""
         minres = float("inf")
+
         l = 0
-        for i in range(len(s)):
+        matches = 0
+        for r, c in enumerate(s):
+            charS[c] += 1
 
-            charMapS[s[i]] = charMapS.get(s[i], 0) + 1
-            if s[i] in charMapT:
-                if charMapS[s[i]] == charMapT[s[i]]:
-                    matches += 1
+            if c in charT and charS[c] == charT[c]:
+                matches += 1
 
-            while matches == len(charMapT) and l <= i:
-                if i - l + 1 < minres:
-                    res = s[l : i + 1]
-                    minres = i - l + 1
-                charMapS[s[l]] -= 1
-                if s[l] in charMapT and charMapS[s[l]] + 1 == charMapT[s[l]]:
+            while matches == len(charT):
+                if r - l + 1 < minres:
+                    res = s[l : r + 1]
+                    minres = r - l + 1
+
+                charS[s[l]] -= 1
+                if s[l] in charT and charS[s[l]] == charT[s[l]] - 1:
                     matches -= 1
                 l += 1
 
