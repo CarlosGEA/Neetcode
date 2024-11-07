@@ -3,14 +3,13 @@ Difficulty : Medium
 Date created : 07-11-2024
 """
 
-import copy
 
 class Solution:
     def subsets(self, nums: list[int]) -> list[list[int]]:
         res = [[]]
         for i in range(len(nums)):
             for s in range(len(res)):
-                news = copy.deepcopy(res[s])
+                news = [i for i in res[s]]
                 news.append(nums[i])
                 res.append(news)
         return res
