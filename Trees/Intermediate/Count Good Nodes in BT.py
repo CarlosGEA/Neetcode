@@ -15,7 +15,22 @@ class Solution:
     def goodNodes(self, root: TreeNode) -> int:
         res = 0
 
-        # go through each node, checking previous path, max value and adding 1 if it's less than or equal, use dfs or stack ??
+        def dfs(node, maxval):
+            # go through each node, checking previous path, max value and adding 1 if it's less than or equal, use dfs or stack ??
+
+            if not node:
+                return
+            
+            nonlocal res
+            if node.val >= maxval:
+                maxval = node.val
+                res += 1
+            dfs(node.left, maxval)
+            dfs(node.right, maxval)
+
+            return None
+
+        dfs(root, float("-inf"))
 
         return res
 
