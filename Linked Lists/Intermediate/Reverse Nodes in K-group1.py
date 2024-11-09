@@ -1,7 +1,8 @@
 """
 Difficulty : Hard
 Date created : 03-11-2024
-New Attempt :
+New Attempt : 06-11-2024
+New Attempt : 09-11-2024
 """
 
 
@@ -15,7 +16,39 @@ class ListNode:
 class Solution:
     def reverseKGroup(self, head: ListNode | None, k: int) -> ListNode | None:
 
-      return
+        prevGroup = dummy = ListNode(0, head)
+
+        while True:
+
+            kth = self.getKth(prevGroup, k)
+            if not kth:
+                break
+
+            nextGroup = kth.next
+
+            prev = prevGroup
+            cur = prevGroup.next
+
+            while cur != nextGroup:
+                tmp = cur.next
+                cur.next = prev
+                prev = cur
+                cur = tmp
+
+            tmp = prevGroup.next
+            prevGroup.next = kth
+            prevGroup = tmp
+            prevGroup.next = nextGroup
+
+        return dummy.next
+
+    def getKth(self, cur, k):
+        while cur and k:
+            cur = cur.next
+            k -= 1
+
+        return cur
+
 
 def arrayToList(arr):
     if not arr:

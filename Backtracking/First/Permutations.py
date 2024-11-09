@@ -20,7 +20,6 @@ class Solution:
 
             return dfs(i + 1, new_cur)
 
-        
         return dfs(0, [[]])
 
 
