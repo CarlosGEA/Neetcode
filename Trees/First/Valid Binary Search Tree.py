@@ -1,7 +1,7 @@
 """
 Difficulty : Medium
 Date created : 06-11-2024
-New attempt : 
+New attempt : 10-11-2024
 """
 
 
@@ -62,7 +62,24 @@ def treeToArr(root):
 class Solution:
     def isValidBST(self, root: TreeNode | None) -> bool:
 
-        return
+        valid = True
+        def dfs(node, left, right):
+
+            if not node:
+                return True
+            
+            nonlocal valid
+            
+            if node.left:
+                valid = valid and dfs(node.left, left, node.val)
+
+            if node.right:
+                valid = valid and dfs(node.right, node.val, right)
+
+
+            return valid and left < node.val < right
+
+        return dfs(root, float("-inf"), float("inf"))
 
 
 def main():

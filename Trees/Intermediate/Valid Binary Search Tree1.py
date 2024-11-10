@@ -1,7 +1,6 @@
 """
 Difficulty : Medium
-Date created : 07-11-2024
-New attempt : 11-11-2024
+Date created : ??-11-2024
 """
 
 
@@ -10,15 +9,6 @@ class TreeNode:
         self.val = val
         self.left = left
         self.right = right
-
-
-class Solution:
-    def buildTree(self, preorder: list[int], inorder: list[int]) -> TreeNode | None:
-        
-
-
-            
-        return 
 
 
 def arrToTree(arr):
@@ -68,17 +58,25 @@ def treeToArr(root):
     return arr
 
 
+class Solution:
+    def isValidBST(self, root: TreeNode | None) -> bool:
+
+        # be smarter with returns and don't have nonlocal
+
+        return
+
 def main():
 
     solution = Solution()
 
-    preorder = [1, 2, 3, 4]
-    inorder = [2, 1, 3, 4]
-    print(f"The tree built is {treeToArr(solution.buildTree(preorder, inorder))}")
+    root = [2, 1, 3]
+    print(f"This is a valid binary search tree? : {solution.isValidBST(arrToTree(root))}")
 
-    preorder = [1]
-    inorder = [1]
-    print(f"The tree built is {treeToArr(solution.buildTree(preorder, inorder))}")
+    root = [1, 2, 3]
+    print(f"This is a valid binary search tree? : {solution.isValidBST(arrToTree(root))}")
+
+    root = [5, 4, 6, None, None, 3, 7]
+    print(f"This is a valid binary search tree? : {solution.isValidBST(arrToTree(root))}")
 
     return None
 

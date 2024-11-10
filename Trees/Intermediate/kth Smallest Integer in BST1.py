@@ -1,8 +1,9 @@
 """
 Difficulty : Medium
-Date created : 07-11-2024
-New attempt : 11-11-2024
+Date created : 10-11-2024
 """
+
+from collections import deque
 
 
 class TreeNode:
@@ -10,15 +11,6 @@ class TreeNode:
         self.val = val
         self.left = left
         self.right = right
-
-
-class Solution:
-    def buildTree(self, preorder: list[int], inorder: list[int]) -> TreeNode | None:
-        
-
-
-            
-        return 
 
 
 def arrToTree(arr):
@@ -68,17 +60,58 @@ def treeToArr(root):
     return arr
 
 
+# class Solution:
+#     def kthSmallest(self, root: TreeNode | None, k: int) -> int:
+
+#         stack = deque([])
+
+#         def dfs(node):
+
+#             if not node:
+#                 return
+
+#             dfs(node.left)
+#             stack.append(node.val)
+#             dfs(node.right)
+
+#             return
+
+#         dfs(root)
+#         return stack[k - 1]
+
+
+class Solution:
+    def kthSmallest(self, root: TreeNode | None, k: int) -> int:
+        cnt = k
+        res = root.val
+
+        def dfs(node):
+            nonlocal cnt, res
+            if not node:
+                return
+
+            dfs(node.left)
+            cnt -= 1
+            if cnt == 0:
+                res = node.val
+                return
+            dfs(node.right)
+
+        dfs(root)
+        return res
+
+
 def main():
 
     solution = Solution()
 
-    preorder = [1, 2, 3, 4]
-    inorder = [2, 1, 3, 4]
-    print(f"The tree built is {treeToArr(solution.buildTree(preorder, inorder))}")
+    root = [2, 1, 3]
+    k = 1
+    print(f"The {k}th smallest element in the tree is {solution.kthSmallest(arrToTree(root), k)}")
 
-    preorder = [1]
-    inorder = [1]
-    print(f"The tree built is {treeToArr(solution.buildTree(preorder, inorder))}")
+    root = [4, 3, 5, 2, None]
+    k = 4
+    print(f"The {k}th smallest element in the tree is {solution.kthSmallest(arrToTree(root), k)}")
 
     return None
 

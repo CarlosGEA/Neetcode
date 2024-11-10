@@ -1,7 +1,6 @@
 """
-Difficulty : Medium
-Date created : 07-11-2024
-New attempt : 11-11-2024
+Difficulty : Easy
+Date created : ??-11-2024
 """
 
 
@@ -13,12 +12,9 @@ class TreeNode:
 
 
 class Solution:
-    def buildTree(self, preorder: list[int], inorder: list[int]) -> TreeNode | None:
-        
+    def isBalanced(self, root: TreeNode | None) -> bool:
 
-
-            
-        return 
+        return
 
 
 def arrToTree(arr):
@@ -72,13 +68,14 @@ def main():
 
     solution = Solution()
 
-    preorder = [1, 2, 3, 4]
-    inorder = [2, 1, 3, 4]
-    print(f"The tree built is {treeToArr(solution.buildTree(preorder, inorder))}")
+    root = [1, 2, 3, None, None, 4]
+    print(f"The tree is balanced? : {solution.isBalanced(arrToTree(root))}")
 
-    preorder = [1]
-    inorder = [1]
-    print(f"The tree built is {treeToArr(solution.buildTree(preorder, inorder))}")
+    root = [1, 2, 3, None, None, 4, None, 5]
+    print(f"The tree is balanced? : {solution.isBalanced(arrToTree(root))}")
+
+    root = []
+    print(f"The tree is balanced? : {solution.isBalanced(arrToTree(root))}")
 
     return None
 

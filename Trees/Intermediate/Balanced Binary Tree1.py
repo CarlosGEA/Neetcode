@@ -1,7 +1,7 @@
 """
 Difficulty : Easy
 Date created : 07-11-2024
-New attempt : ??
+New attempt : 10-11-2024
 """
 
 
@@ -15,7 +15,25 @@ class TreeNode:
 class Solution:
     def isBalanced(self, root: TreeNode | None) -> bool:
 
-        return
+        balanced = True
+
+        def dfs(node, height):
+
+            if not node:
+                return 0
+            
+            nonlocal balanced
+
+            lh = dfs(node.left, height + 1)
+            rh = dfs(node.right, height + 1)
+
+        
+            balanced = balanced and abs(lh - rh) < 2
+            return max(lh, rh) + 1    
+        
+
+        dfs(root, 0)
+        return balanced
 
 
 def arrToTree(arr):

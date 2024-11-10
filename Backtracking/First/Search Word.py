@@ -10,6 +10,8 @@ from collections import defaultdict
 class Solution:
     def exist(self, board: list[list[str]], word: str) -> bool:
 
+        # backtrack and store currently used letters, iterate through each letter
+
         return
 
 
