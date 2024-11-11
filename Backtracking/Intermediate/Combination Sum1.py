@@ -8,7 +8,7 @@ class Solution:
     def combinationSum(self, nums: list[int], target: int) -> list[list[int]]:
 
         res = []
-        # nums.sort()
+        nums.sort()
 
         def backtrack(cur, i, val):
 
