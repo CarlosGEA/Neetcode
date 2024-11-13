@@ -1,6 +1,6 @@
 """
 Difficulty : Easy
-Date created : ??-11-2024
+Date created : 13-11-2024
 """
 
 
@@ -14,8 +14,23 @@ class TreeNode:
 class Solution:
     def isBalanced(self, root: TreeNode | None) -> bool:
 
-        return
+        self.Balanced = True
+        def dfs(node):
 
+            if not node:
+                return 0
+            
+            lh = dfs(node.left) + 1
+            rh = dfs(node.right) + 1
+
+            if abs(lh - rh) > 1:
+                self.Balanced = False 
+        
+
+            return max(lh, rh)
+        
+        dfs(root)
+        return self.Balanced
 
 def arrToTree(arr):
     if not arr:

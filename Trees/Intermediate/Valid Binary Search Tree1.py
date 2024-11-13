@@ -1,6 +1,6 @@
 """
 Difficulty : Medium
-Date created : ??-11-2024
+Date created : 13-11-2024
 """
 
 
@@ -61,9 +61,17 @@ def treeToArr(root):
 class Solution:
     def isValidBST(self, root: TreeNode | None) -> bool:
 
-        # be smarter with returns and don't have nonlocal
+        def dfs(node, l, r):
+            if not node:
+                return True
 
-        return
+            if not l < node.val < r:
+                return False
+
+            return dfs(node.left, l, node.val) and dfs(node.right, node.val, r)
+
+        return dfs(root, float("-inf"), float("inf"))
+
 
 def main():
 
