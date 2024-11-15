@@ -1,6 +1,7 @@
 """
 Difficulty : Easy
-Date created : 09-11-2024
+Date created : 12-11-2024
+New Attempt : 15-11-2024
 """
 
 
@@ -13,29 +14,26 @@ class TreeNode:
 
 class Solution:
     def isSubtree(self, root: TreeNode | None, subRoot: TreeNode | None) -> bool:
-
         if not subRoot:
             return True
+
         if not root:
             return False
         
-        if root.val == subRoot.val:
-            return self.isSubtree(root.left, subRoot.left) and self.isSubtree(root.right, subRoot.right)
+        if self.isSame(root, subRoot):
+            return True
 
-        if self.isSameTree(root, subRoot):
-            return True
-        
-    
         return self.isSubtree(root.left, subRoot) or self.isSubtree(root.right, subRoot)
-    
-    def isSameTree(self, r, s):
-        if not r and not s:
+
+    def isSame(self, root, subroot) -> bool:
+
+        if not root and not subroot:
             return True
-        
-        if r and s and r.val == s.val:
-            return self.isSameTree(r.left, s.left) and self.isSameTree(r.right, s.right)
-        
-        return False
+
+        if not root or not subroot or root.val != subroot.val:
+            return False
+
+        return self.isSame(root.left, subroot.left) and self.isSame(root.right, subroot.right)
 
 
 def arrToTree(arr):

@@ -1,6 +1,7 @@
 """
 Difficulty : Easy
 Date created : 05-11-2024
+New Attempt : 09-11-2024
 """
 
 from collections import deque
