@@ -1,6 +1,6 @@
 """
 Difficulty : Medium
-Date created : 17-11-2024
+Date created : -11-2024
 """
 
 
@@ -14,16 +14,10 @@ class TreeNode:
 class Solution:
     def buildTree(self, preorder: list[int], inorder: list[int]) -> TreeNode | None:
 
-        if not preorder:
-            return None
+        # same as before, recursive but now have other function, working through left, right
+        # store and increment value of the preorder index and indices for inorder so look up
 
-        root = TreeNode(preorder[0])
-        split = inorder.index(preorder[0])
-
-        root.left = self.buildTree(preorder[1 : split + 1], inorder[:split])
-        root.right = self.buildTree(preorder[split + 1 :], inorder[split + 1 :])
-
-        return root
+        return 
 
 
 def arrToTree(arr):

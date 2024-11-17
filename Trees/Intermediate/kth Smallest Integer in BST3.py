@@ -1,6 +1,6 @@
 """
 Difficulty : Medium
-Date created : 14-11-2024
+Date created : 17-11-2024
 """
 
 
@@ -60,9 +60,18 @@ def treeToArr(root):
 
 class Solution:
     def kthSmallest(self, root: TreeNode | None, k: int) -> int:
-        # do dfs method and stack method
+        res = []
 
-        return
+        def dfs(node):
+            if not node:
+                return None
+
+            dfs(node.left)
+            res.append(node.val)
+            dfs(node.right)
+
+        dfs(root)
+        return res[k - 1]
 
 
 def main():
