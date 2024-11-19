@@ -1,16 +1,7 @@
 """
 Difficulty : Hard
-Date created : 31-10-2024
+Date created : 19-11-2024
 """
-
-
-def listToArr(head):
-    current = head
-    arr = []
-    while current:
-        arr.append(current.val)
-        current = current.next
-    return arr
 
 
 class ListNode:
@@ -26,32 +17,39 @@ class Solution:
             return None
 
         while len(lists) > 1:
-            newlists = []
+
+            new_list = []
+
             for i in range(0, len(lists), 2):
                 l1 = lists[i]
                 l2 = lists[i + 1] if i + 1 < len(lists) else None
-                newlists.append(listToArr(self.mergeTwoLists(arrayToList(l1), arrayToList(l2))))
-                # newlists.append(self.mergeTwoLists(l1, l2))
+                # new_list.append(self.mergeLists(l1, l2))
+                new_list.append(listToArr(self.mergeLists(arrayToList(l1), arrayToList(l2))))
 
-            lists = newlists
+            lists = new_list
+
         return lists[0]
 
-    def mergeTwoLists(self, list1: ListNode | None, list2: ListNode | None) -> ListNode | None:
+    def mergeLists(self, l1, l2) -> ListNode:
 
-        dummy = newlist = ListNode()
+        dummy = head = ListNode()
 
-        while list1 or list2:
+        while l1 and l2:
 
-            val1 = list1.val if list1 else float("inf")
-            val2 = list2.val if list2 else float("inf")
-            if val1 > val2:
-                newlist.next = list2
-                list2 = list2.next
+            val1 = l1.val
+            val2 = l2.val
+
+            if val2 > val1:
+                head.next = l1
+                l1 = l1.next
+
             else:
-                newlist.next = list1
-                list1 = list1.next
+                head.next = l2
+                l2 = l2.next
 
-            newlist = newlist.next
+            head = head.next
+
+        head.next = l1 or l2
 
         return dummy.next
 
@@ -66,6 +64,15 @@ def arrayToList(arr):
         current.next = ListNode(value)
         current = current.next
     return head
+
+
+def listToArr(head):
+    current = head
+    arr = []
+    while current:
+        arr.append(current.val)
+        current = current.next
+    return arr
 
 
 def main():
