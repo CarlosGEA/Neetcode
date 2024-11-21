@@ -1,5 +1,5 @@
 """
-Difficulty : Medium
+Difficulty : Hard
 Date created : 21-11-2024
 """
 
@@ -12,22 +12,26 @@ class TreeNode:
 
 
 class Solution:
-    def buildTree(self, preorder: list[int], inorder: list[int]) -> TreeNode | None:
+    def maxPathSum(self, root: TreeNode | None) -> int:
 
-        # same as before, recursive but now have other function, working through left, right
-        # store and increment value of the preorder index and indices for inorder so look up
-        if not preorder:
-            return None
+        res = float("-inf")
 
-        mid = preorder[0]
-        split = inorder.index(mid)
+        def dfs(node):
+            if not node:
+                return 0
 
-        root = TreeNode(mid)
-        root.left = self.buildTree(preorder[1 : split + 1], inorder[:split])
-        root.right = self.buildTree(preorder[split + 1 :], inorder[split + 1 :])
+            cur = node.val
 
-        return root
+            left_val = dfs(node.left)
+            right_val = dfs(node.right)
 
+            nonlocal res
+            res = max(res, cur + left_val + right_val)
+
+            return max(0, cur, cur + max(left_val, right_val))
+
+        dfs(root)
+        return res
 
 
 def arrToTree(arr):
@@ -81,13 +85,14 @@ def main():
 
     solution = Solution()
 
-    preorder = [1, 2, 3, 4]
-    inorder = [2, 1, 3, 4]
-    print(f"The tree built is {treeToArr(solution.buildTree(preorder, inorder))}")
+    root = [-15, 10, 20, None, None, 15, 5, -5]
+    print(f"The max sum path of the tree is {solution.maxPathSum(arrToTree(root))}")
 
-    preorder = [1]
-    inorder = [1]
-    print(f"The tree built is {treeToArr(solution.buildTree(preorder, inorder))}")
+    root = [1, 2, 3]
+    print(f"The max sum path of the tree is {solution.maxPathSum(arrToTree(root))}")
+
+    root = [5, 4, 8, 11, None, 13, 4, 7, 2, None, None, None, 1]
+    print(f"The max sum path of the tree is {solution.maxPathSum(arrToTree(root))}")
 
     return None
 
