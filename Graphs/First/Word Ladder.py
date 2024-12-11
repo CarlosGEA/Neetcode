@@ -7,6 +7,12 @@ Date created : 07-12-2024
 class Solution:
     def ladderLength(self, beginWord: str, endWord: str, wordList: list[str]) -> int:
 
+        # helper function to see if words differ by 1,
+        # seen set to ensure in a path you don't return to a previously used word
+        # iterate through words in list and if can move onto the next dfs through next one
+        # store a count of current path and a min count
+        # return min or 0 if min is inf
+
         wordSet = set(wordList)
         if endWord not in wordSet:
             return 0
