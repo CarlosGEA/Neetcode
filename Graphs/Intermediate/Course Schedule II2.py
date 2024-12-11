@@ -1,37 +1,39 @@
 """
 Difficulty : Medium
-Date created : 07-12-2024
+Date created : 10-12-2024
 """
 
 
 class Solution:
     def findOrder(self, numCourses: int, prerequisites: list[list[int]]) -> list[int]:
-        countMap = {i: [] for i in range(numCourses)}
-        for p, c in prerequisites:
-            countMap[p].append(c)
+        courseMap = {i: [] for i in range(numCourses)}
+
+        for c, p in prerequisites:
+            courseMap[c].append(p)
 
         def dfs(course):
             if course in seen:
                 return False
 
-            if course in visit:
+            if course in visited:
                 return True
 
             seen.add(course)
-            for nc in countMap[course]:
+            for nc in courseMap[course]:
                 if not dfs(nc):
                     return False
 
             seen.remove(course)
             res.append(course)
-            visit.add(course)
+            visited.add(course)
             return True
 
-        seen = set()
-        visit = set()
         res = []
-        for course in range(numCourses):
-            if not dfs(course):
+        seen = set()
+        visited = set()
+
+        for c in range(numCourses):
+            if not dfs(c):
                 return []
 
         return res
