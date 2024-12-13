@@ -1,6 +1,6 @@
 """
-Difficulty : 
-Date created : -12-2024
+Difficulty : Hard
+Date created : 13-12-2024
 """
 
 
@@ -14,11 +14,38 @@ class TreeNode:
 class Codec:
 
     def serialize(self, root: TreeNode | None) -> str:
-        return
+        serialized = []
+
+        def dfs(node):
+            if not node:
+                serialized.append("?")
+                return
+            serialized.append(str(node.val))
+            dfs(node.left)
+            dfs(node.right)
+
+            return
+        
+        dfs(root)
+        return "#".join(serialized)
 
     def deserialize(self, data: str) -> TreeNode | None:
+        
+        values = data.split("#")
+        i = 0
+        def dfs():
+            nonlocal i
+            if values[i] == "?":
+                i += 1
+                return None
+            
+            root = TreeNode(int(values[i]))
+            i += 1
+            root.left = dfs()
+            root.right = dfs()
+            return root
 
-        return
+        return dfs()
 
 
 def arrToTree(arr):

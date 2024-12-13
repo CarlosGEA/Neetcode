@@ -1,5 +1,5 @@
 """
-Difficulty : 
+Difficulty : Hard
 Date created : 09-12-2024
 """
 

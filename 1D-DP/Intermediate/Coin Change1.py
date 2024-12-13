@@ -1,23 +1,31 @@
 """
 Difficulty : Medium
-Date created : -12-2024
+Date created : 13-12-2024
 """
 
 
 class Solution:
     def coinChange(self, coins: list[int], amount: int) -> int:
-       return
+
+        res = [float("inf")] * (amount + 1)
+        res[0] = 0
+
+        for i in range(len(res)):
+            for c in coins:
+                if c + i <= amount:
+                    res[c + i] = min(res[c + i], 1 + res[i])
+
+        return res[amount] if res[amount] != float("inf") else -1
 
 
 def main():
 
     solution = Solution()
 
-    # coins = [1, 5, 10]
-    # amount = 12
-    coins = [2147483647]
-    amount = 2
-
+    coins = [1, 5, 10]
+    amount = 12
+    # coins = [2147483647]
+    # amount = 2
     print(
         f"The minimum number of coins needed to make {amount} is {solution.coinChange(coins, amount)}"
     )
