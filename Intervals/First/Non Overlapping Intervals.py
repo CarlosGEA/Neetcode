@@ -1,15 +1,17 @@
 """
 Difficulty : Medium
 Date created : 12-12-2024
-New attempt : 15-12-2024
+New attempt : 16-12-2024
+New attempt : 19-12-2024
 """
 
 
 class Solution:
     def eraseOverlapIntervals(self, intervals: list[list[int]]) -> int:
-        # greedy sort by start
-
+       
         return
+
+
 
 
 def main():
