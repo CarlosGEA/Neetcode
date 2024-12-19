@@ -1,7 +1,6 @@
 """
-Difficulty : Easy 
-Date created : 04-11-2024
-New Attempt : 07-11-2024
+Difficulty : Easy
+Date created : 19-12-2024
 """
 
 from collections import deque
@@ -15,23 +14,23 @@ class TreeNode:
 
 
 class Solution:
-    def diameterOfBinaryTree(self, root: TreeNode | None) -> int:
+    def isBalanced(self, root: TreeNode | None) -> bool:
 
-        self.res = 0
+        balanced = True
 
-        def dfs(curr):
-            if not curr:
+        def dfs(root):
+            nonlocal balanced
+            if not root:
                 return 0
 
-            left = dfs(curr.left)
-            right = dfs(curr.right)
+            left = dfs(root.left)
+            right = dfs(root.right)
+            balanced &= abs(left - right) <= 1
 
-            self.res = max(self.res, left + right)
-
-            return max(left, right) + 1
+            return 1 + max(left, right)
 
         dfs(root)
-        return self.res
+        return balanced
 
 
 def arrToTree(arr):
@@ -85,14 +84,14 @@ def main():
 
     solution = Solution()
 
-    root = [1, None, 2, 3, 4, 5]
-    print(f"The diameter of the binary tree is {solution.diameterOfBinaryTree(arrToTree(root))}")
+    root = [1, 2, 3, None, None, 4, None, 5]
+    print(f"The binary tree is balanced? : {solution.isBalanced(arrToTree(root))}")
 
-    root = [1, 2, 3]
-    print(f"The diameter of the binary tree is {solution.diameterOfBinaryTree(arrToTree(root))}")
+    root = [1, 2, 3, None, None, 4]
+    print(f"The binary tree is balanced? : {solution.isBalanced(arrToTree(root))}")
 
-    root = [1, 4, 3, 2]
-    print(f"The diameter of the binary tree is {solution.diameterOfBinaryTree(arrToTree(root))}")
+    root = []
+    print(f"The binary tree is balanced? : {solution.isBalanced(arrToTree(root))}")
 
     return None
 

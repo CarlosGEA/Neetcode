@@ -1,10 +1,7 @@
 """
-Difficulty : Easy 
-Date created : 04-11-2024
-New Attempt : 07-11-2024
+Difficulty : Medium
+Date created : 19-12-2024
 """
-
-from collections import deque
 
 
 class TreeNode:
@@ -12,26 +9,6 @@ class TreeNode:
         self.val = val
         self.left = left
         self.right = right
-
-
-class Solution:
-    def diameterOfBinaryTree(self, root: TreeNode | None) -> int:
-
-        self.res = 0
-
-        def dfs(curr):
-            if not curr:
-                return 0
-
-            left = dfs(curr.left)
-            right = dfs(curr.right)
-
-            self.res = max(self.res, left + right)
-
-            return max(left, right) + 1
-
-        dfs(root)
-        return self.res
 
 
 def arrToTree(arr):
@@ -81,18 +58,38 @@ def treeToArr(root):
     return arr
 
 
+class Solution:
+    def goodNodes(self, root: TreeNode) -> int:
+
+        count = 0
+
+        def dfs(node, val):
+            if not node:
+                return
+
+            nonlocal count
+            if node.val >= val:
+                count += 1
+
+            dfs(node.left, max(val, node.val))
+            dfs(node.right, max(val, node.val))
+
+            return
+
+        dfs(root, float("-inf"))
+        return count
+
+
 def main():
 
     solution = Solution()
 
-    root = [1, None, 2, 3, 4, 5]
-    print(f"The diameter of the binary tree is {solution.diameterOfBinaryTree(arrToTree(root))}")
+    # root = [2, 1, 1, 3, None, 1, 5]
+    root = [3, 3, None, 4, 2]
+    print(f"The number of good nodes in this tree is {solution.goodNodes(arrToTree(root))}")
 
-    root = [1, 2, 3]
-    print(f"The diameter of the binary tree is {solution.diameterOfBinaryTree(arrToTree(root))}")
-
-    root = [1, 4, 3, 2]
-    print(f"The diameter of the binary tree is {solution.diameterOfBinaryTree(arrToTree(root))}")
+    root = [1, 2, -1, 3, 4]
+    print(f"The number of good nodes in this tree is {solution.goodNodes(arrToTree(root))}")
 
     return None
 

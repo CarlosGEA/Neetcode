@@ -1,7 +1,6 @@
 """
-Difficulty : Easy 
-Date created : 04-11-2024
-New Attempt : 07-11-2024
+Difficulty : Medium
+Date created : 19-12-2024
 """
 
 from collections import deque
@@ -12,26 +11,6 @@ class TreeNode:
         self.val = val
         self.left = left
         self.right = right
-
-
-class Solution:
-    def diameterOfBinaryTree(self, root: TreeNode | None) -> int:
-
-        self.res = 0
-
-        def dfs(curr):
-            if not curr:
-                return 0
-
-            left = dfs(curr.left)
-            right = dfs(curr.right)
-
-            self.res = max(self.res, left + right)
-
-            return max(left, right) + 1
-
-        dfs(root)
-        return self.res
 
 
 def arrToTree(arr):
@@ -81,19 +60,47 @@ def treeToArr(root):
     return arr
 
 
+class Solution:
+    def rightSideView(self, root: TreeNode | None) -> list[int]:
+
+        if not root:
+            return []
+        q = deque([root])
+        res = []
+
+        while q:
+            res.append(q[0].val)
+
+            for _ in range(len(q)):
+                node = q.popleft()
+
+                if node.right:
+                    q.append(node.right)
+
+                if node.left:
+                    q.append(node.left)
+
+        return res
+
+
 def main():
 
     solution = Solution()
 
-    root = [1, None, 2, 3, 4, 5]
-    print(f"The diameter of the binary tree is {solution.diameterOfBinaryTree(arrToTree(root))}")
+    # root = [1, 2, 3]
+    # print(
+    #     f"The value of the nodes only visible from the right are {solution.rightSideView(arrToTree(root))}"
+    # )
 
-    root = [1, 2, 3]
-    print(f"The diameter of the binary tree is {solution.diameterOfBinaryTree(arrToTree(root))}")
+    # root = [1, 2, 3, 4, 5, 6, 7]
+    # print(
+    #     f"The value of the nodes only visible from the right are {solution.rightSideView(arrToTree(root))}"
+    # )
 
-    root = [1, 4, 3, 2]
-    print(f"The diameter of the binary tree is {solution.diameterOfBinaryTree(arrToTree(root))}")
-
+    root = [4, 3, 6, 1, None, 5, None, None, 2]
+    print(
+        f"The value of the nodes only visible from the right are {solution.rightSideView(arrToTree(root))}"
+    )
     return None
 
 

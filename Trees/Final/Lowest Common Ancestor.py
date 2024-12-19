@@ -1,10 +1,10 @@
 """
-Difficulty : Easy 
-Date created : 04-11-2024
-New Attempt : 07-11-2024
+Difficulty : Medium
+Date created : 19-12-2024
 """
 
 from collections import deque
+from collections import defaultdict
 
 
 class TreeNode:
@@ -15,23 +15,21 @@ class TreeNode:
 
 
 class Solution:
-    def diameterOfBinaryTree(self, root: TreeNode | None) -> int:
+    def lowestCommonAncestor(self, root: TreeNode, p: TreeNode, q: TreeNode) -> TreeNode:
+        # pval = p.val
+        # qval = q.val
+        pval = p
+        qval = q
 
-        self.res = 0
+        if pval <= root.val and qval >= root.val or pval >= root.val and qval <= root.val:
+            # return root
+            return root.val
 
-        def dfs(curr):
-            if not curr:
-                return 0
+        elif pval <= root.val and qval <= root.val:
+            return self.lowestCommonAncestor(root.left, p, q)
 
-            left = dfs(curr.left)
-            right = dfs(curr.right)
-
-            self.res = max(self.res, left + right)
-
-            return max(left, right) + 1
-
-        dfs(root)
-        return self.res
+        else:
+            return self.lowestCommonAncestor(root.right, p, q)
 
 
 def arrToTree(arr):
@@ -85,14 +83,19 @@ def main():
 
     solution = Solution()
 
-    root = [1, None, 2, 3, 4, 5]
-    print(f"The diameter of the binary tree is {solution.diameterOfBinaryTree(arrToTree(root))}")
+    root = [5, 3, 8, 1, 4, 7, 9, None, 2]
+    p = 3
+    q = 8
+    print(
+        f"The lowest common ancestor of {p} and {q} is {solution.lowestCommonAncestor(arrToTree(root), p, q)}"
+    )
 
-    root = [1, 2, 3]
-    print(f"The diameter of the binary tree is {solution.diameterOfBinaryTree(arrToTree(root))}")
-
-    root = [1, 4, 3, 2]
-    print(f"The diameter of the binary tree is {solution.diameterOfBinaryTree(arrToTree(root))}")
+    root = [5, 3, 8, 1, 4, 7, 9, None, 2]
+    p = 3
+    q = 4
+    print(
+        f"The lowest common ancestor of {p} and {q} is {solution.lowestCommonAncestor(arrToTree(root), p, q)}"
+    )
 
     return None
 

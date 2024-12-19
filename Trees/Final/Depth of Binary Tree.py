@@ -1,10 +1,7 @@
 """
-Difficulty : Easy 
-Date created : 04-11-2024
-New Attempt : 07-11-2024
+Difficulty : Easy
+Date created : 19-12-2024
 """
-
-from collections import deque
 
 
 class TreeNode:
@@ -15,23 +12,11 @@ class TreeNode:
 
 
 class Solution:
-    def diameterOfBinaryTree(self, root: TreeNode | None) -> int:
+    def maxDepth(self, root: TreeNode | None) -> int:
+        if not root:
+            return 0
 
-        self.res = 0
-
-        def dfs(curr):
-            if not curr:
-                return 0
-
-            left = dfs(curr.left)
-            right = dfs(curr.right)
-
-            self.res = max(self.res, left + right)
-
-            return max(left, right) + 1
-
-        dfs(root)
-        return self.res
+        return 1 + max(self.maxDepth(root.left), self.maxDepth(root.right))
 
 
 def arrToTree(arr):
@@ -85,14 +70,11 @@ def main():
 
     solution = Solution()
 
-    root = [1, None, 2, 3, 4, 5]
-    print(f"The diameter of the binary tree is {solution.diameterOfBinaryTree(arrToTree(root))}")
+    root = [1, 2, 3, None, None, 4]
+    print(f"The maximum depth of the tree is {solution.maxDepth(arrToTree(root))}")
 
-    root = [1, 2, 3]
-    print(f"The diameter of the binary tree is {solution.diameterOfBinaryTree(arrToTree(root))}")
-
-    root = [1, 4, 3, 2]
-    print(f"The diameter of the binary tree is {solution.diameterOfBinaryTree(arrToTree(root))}")
+    root = []
+    print(f"The maximum depth of the tree is {solution.maxDepth(arrToTree(root))}")
 
     return None
 

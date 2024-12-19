@@ -1,10 +1,7 @@
 """
-Difficulty : Easy 
-Date created : 04-11-2024
-New Attempt : 07-11-2024
+Difficulty : Hard
+Date created : -11-2024
 """
-
-from collections import deque
 
 
 class TreeNode:
@@ -15,23 +12,9 @@ class TreeNode:
 
 
 class Solution:
-    def diameterOfBinaryTree(self, root: TreeNode | None) -> int:
+    def maxSumPath(self, root: TreeNode | None) -> int:
 
-        self.res = 0
-
-        def dfs(curr):
-            if not curr:
-                return 0
-
-            left = dfs(curr.left)
-            right = dfs(curr.right)
-
-            self.res = max(self.res, left + right)
-
-            return max(left, right) + 1
-
-        dfs(root)
-        return self.res
+        return
 
 
 def arrToTree(arr):
@@ -82,17 +65,13 @@ def treeToArr(root):
 
 
 def main():
-
     solution = Solution()
 
-    root = [1, None, 2, 3, 4, 5]
-    print(f"The diameter of the binary tree is {solution.diameterOfBinaryTree(arrToTree(root))}")
-
     root = [1, 2, 3]
-    print(f"The diameter of the binary tree is {solution.diameterOfBinaryTree(arrToTree(root))}")
+    print(f"The maximum sum path in this tree is {solution.maxSumPath(arrToTree(root))}")
 
-    root = [1, 4, 3, 2]
-    print(f"The diameter of the binary tree is {solution.diameterOfBinaryTree(arrToTree(root))}")
+    root = [-15, 10, 20, None, None, 15, 5, -5]
+    print(f"The maximum sum path in this tree is {solution.maxSumPath(arrToTree(root))}")
 
     return None
 

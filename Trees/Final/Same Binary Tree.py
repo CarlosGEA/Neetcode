@@ -1,7 +1,6 @@
 """
-Difficulty : Easy 
-Date created : 04-11-2024
-New Attempt : 07-11-2024
+Difficulty : Easy
+Date created : 19-12-2024
 """
 
 from collections import deque
@@ -15,23 +14,19 @@ class TreeNode:
 
 
 class Solution:
-    def diameterOfBinaryTree(self, root: TreeNode | None) -> int:
+    def isSameTree(self, p: TreeNode | None, q: TreeNode | None) -> bool:
 
-        self.res = 0
+        if not p and not q:
+            return True
 
-        def dfs(curr):
-            if not curr:
-                return 0
+        elif not p or not q:
+            return False
 
-            left = dfs(curr.left)
-            right = dfs(curr.right)
-
-            self.res = max(self.res, left + right)
-
-            return max(left, right) + 1
-
-        dfs(root)
-        return self.res
+        return (
+            (p.val == q.val)
+            & (self.isSameTree(p.left, q.left))
+            & (self.isSameTree(p.right, q.right))
+        )
 
 
 def arrToTree(arr):
@@ -85,14 +80,17 @@ def main():
 
     solution = Solution()
 
-    root = [1, None, 2, 3, 4, 5]
-    print(f"The diameter of the binary tree is {solution.diameterOfBinaryTree(arrToTree(root))}")
+    p = [1, 2, 3]
+    q = [1, 2, 3]
+    print(f"The trees are the same? : {solution.isSameTree(arrToTree(p), arrToTree(q))}")
 
-    root = [1, 2, 3]
-    print(f"The diameter of the binary tree is {solution.diameterOfBinaryTree(arrToTree(root))}")
+    p = [4, 7]
+    q = [4, None, 7]
+    print(f"The trees are the same? : {solution.isSameTree(arrToTree(p), arrToTree(q))}")
 
-    root = [1, 4, 3, 2]
-    print(f"The diameter of the binary tree is {solution.diameterOfBinaryTree(arrToTree(root))}")
+    p = [1, 2, 3]
+    q = [1, 3, 2]
+    print(f"The trees are the same? : {solution.isSameTree(arrToTree(p), arrToTree(q))}")
 
     return None
 

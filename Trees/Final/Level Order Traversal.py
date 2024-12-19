@@ -1,7 +1,6 @@
 """
-Difficulty : Easy 
-Date created : 04-11-2024
-New Attempt : 07-11-2024
+Difficulty : Medium
+Date created : 19-12-2024
 """
 
 from collections import deque
@@ -15,23 +14,26 @@ class TreeNode:
 
 
 class Solution:
-    def diameterOfBinaryTree(self, root: TreeNode | None) -> int:
+    def levelOrder(self, root: TreeNode | None) -> list[list[int]]:
 
-        self.res = 0
+        res = []
 
-        def dfs(curr):
-            if not curr:
-                return 0
+        stack = deque([root])
 
-            left = dfs(curr.left)
-            right = dfs(curr.right)
+        while stack:
+            tmp = []
+            for _ in range(len(stack)):
+                node = stack.popleft()
+                if not node:
+                    continue
 
-            self.res = max(self.res, left + right)
+                tmp.append(node.val)
+                stack.append(node.left)
+                stack.append(node.right)
+            if tmp:
+                res.append(tmp)
 
-            return max(left, right) + 1
-
-        dfs(root)
-        return self.res
+        return res
 
 
 def arrToTree(arr):
@@ -85,14 +87,14 @@ def main():
 
     solution = Solution()
 
-    root = [1, None, 2, 3, 4, 5]
-    print(f"The diameter of the binary tree is {solution.diameterOfBinaryTree(arrToTree(root))}")
+    root = [1, 2, 3, 4, 5, 6, 7]
+    print(f"The values of the nodes at each level is {solution.levelOrder(arrToTree(root))}")
 
-    root = [1, 2, 3]
-    print(f"The diameter of the binary tree is {solution.diameterOfBinaryTree(arrToTree(root))}")
+    root = [1]
+    print(f"The values of the nodes at each level is {solution.levelOrder(arrToTree(root))}")
 
-    root = [1, 4, 3, 2]
-    print(f"The diameter of the binary tree is {solution.diameterOfBinaryTree(arrToTree(root))}")
+    root = []
+    print(f"The values of the nodes at each level is {solution.levelOrder(arrToTree(root))}")
 
     return None
 

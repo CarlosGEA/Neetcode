@@ -1,10 +1,7 @@
 """
-Difficulty : Easy 
-Date created : 04-11-2024
-New Attempt : 07-11-2024
+Difficulty : Easy
+Date created : 19-12-2024
 """
-
-from collections import deque
 
 
 class TreeNode:
@@ -15,23 +12,16 @@ class TreeNode:
 
 
 class Solution:
-    def diameterOfBinaryTree(self, root: TreeNode | None) -> int:
+    def invertTree(self, root: TreeNode | None) -> TreeNode | None:
 
-        self.res = 0
+        if not root:
+            return None
 
-        def dfs(curr):
-            if not curr:
-                return 0
+        root.left, root.right = root.right, root.left
+        self.invertTree(root.left)
+        self.invertTree(root.right)
 
-            left = dfs(curr.left)
-            right = dfs(curr.right)
-
-            self.res = max(self.res, left + right)
-
-            return max(left, right) + 1
-
-        dfs(root)
-        return self.res
+        return root
 
 
 def arrToTree(arr):
@@ -85,14 +75,11 @@ def main():
 
     solution = Solution()
 
-    root = [1, None, 2, 3, 4, 5]
-    print(f"The diameter of the binary tree is {solution.diameterOfBinaryTree(arrToTree(root))}")
+    root = [1, 2, 3, 4, 5, 6, 7]
+    print(f"The inverted binary tree is {treeToArr(solution.invertTree(arrToTree(root)))}")
 
-    root = [1, 2, 3]
-    print(f"The diameter of the binary tree is {solution.diameterOfBinaryTree(arrToTree(root))}")
-
-    root = [1, 4, 3, 2]
-    print(f"The diameter of the binary tree is {solution.diameterOfBinaryTree(arrToTree(root))}")
+    root = [3, 2, 1]
+    print(f"The inverted binary tree is {treeToArr(solution.invertTree(arrToTree(root)))}")
 
     return None
 

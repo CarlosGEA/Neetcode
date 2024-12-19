@@ -1,10 +1,7 @@
 """
-Difficulty : Easy 
-Date created : 04-11-2024
-New Attempt : 07-11-2024
+Difficulty : Hard
+Date created : 21-11-2024
 """
-
-from collections import deque
 
 
 class TreeNode:
@@ -15,23 +12,26 @@ class TreeNode:
 
 
 class Solution:
-    def diameterOfBinaryTree(self, root: TreeNode | None) -> int:
+    def maxPathSum(self, root: TreeNode | None) -> int:
 
-        self.res = 0
+        res = float("-inf")
 
-        def dfs(curr):
-            if not curr:
+        def dfs(node):
+            if not node:
                 return 0
 
-            left = dfs(curr.left)
-            right = dfs(curr.right)
+            cur = node.val
 
-            self.res = max(self.res, left + right)
+            left_val = dfs(node.left)
+            right_val = dfs(node.right)
 
-            return max(left, right) + 1
+            nonlocal res
+            res = max(res, cur + left_val + right_val)
+
+            return max(0, cur, cur + max(left_val, right_val))
 
         dfs(root)
-        return self.res
+        return res
 
 
 def arrToTree(arr):
@@ -85,14 +85,14 @@ def main():
 
     solution = Solution()
 
-    root = [1, None, 2, 3, 4, 5]
-    print(f"The diameter of the binary tree is {solution.diameterOfBinaryTree(arrToTree(root))}")
+    root = [-15, 10, 20, None, None, 15, 5, -5]
+    print(f"The max sum path of the tree is {solution.maxPathSum(arrToTree(root))}")
 
     root = [1, 2, 3]
-    print(f"The diameter of the binary tree is {solution.diameterOfBinaryTree(arrToTree(root))}")
+    print(f"The max sum path of the tree is {solution.maxPathSum(arrToTree(root))}")
 
-    root = [1, 4, 3, 2]
-    print(f"The diameter of the binary tree is {solution.diameterOfBinaryTree(arrToTree(root))}")
+    root = [5, 4, 8, 11, None, 13, 4, 7, 2, None, None, None, 1]
+    print(f"The max sum path of the tree is {solution.maxPathSum(arrToTree(root))}")
 
     return None
 

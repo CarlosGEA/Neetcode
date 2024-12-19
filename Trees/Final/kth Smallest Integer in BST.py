@@ -1,10 +1,7 @@
 """
-Difficulty : Easy 
-Date created : 04-11-2024
-New Attempt : 07-11-2024
+Difficulty : Medium
+Date created : 06-11-2024
 """
-
-from collections import deque
 
 
 class TreeNode:
@@ -12,26 +9,6 @@ class TreeNode:
         self.val = val
         self.left = left
         self.right = right
-
-
-class Solution:
-    def diameterOfBinaryTree(self, root: TreeNode | None) -> int:
-
-        self.res = 0
-
-        def dfs(curr):
-            if not curr:
-                return 0
-
-            left = dfs(curr.left)
-            right = dfs(curr.right)
-
-            self.res = max(self.res, left + right)
-
-            return max(left, right) + 1
-
-        dfs(root)
-        return self.res
 
 
 def arrToTree(arr):
@@ -81,18 +58,33 @@ def treeToArr(root):
     return arr
 
 
+class Solution:
+    def kthSmallest(self, root: TreeNode | None, k: int) -> int:
+
+        arr = []
+        stack = [root]
+
+        while stack:
+            node = stack.pop(0)
+            if node:
+                arr.append(node.val)
+                stack.append(node.left)
+                stack.append(node.right)
+
+        return sorted(arr)[k - 1]
+
+
 def main():
 
     solution = Solution()
 
-    root = [1, None, 2, 3, 4, 5]
-    print(f"The diameter of the binary tree is {solution.diameterOfBinaryTree(arrToTree(root))}")
+    root = [2, 1, 3]
+    k = 1
+    print(f"The {k}th smallest element in the tree is {solution.kthSmallest(arrToTree(root), k)}")
 
-    root = [1, 2, 3]
-    print(f"The diameter of the binary tree is {solution.diameterOfBinaryTree(arrToTree(root))}")
-
-    root = [1, 4, 3, 2]
-    print(f"The diameter of the binary tree is {solution.diameterOfBinaryTree(arrToTree(root))}")
+    root = [4, 3, 5, 2, None]
+    k = 4
+    print(f"The {k}th smallest element in the tree is {solution.kthSmallest(arrToTree(root), k)}")
 
     return None
 

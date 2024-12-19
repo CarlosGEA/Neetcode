@@ -1,7 +1,7 @@
 """
 Difficulty : Easy 
-Date created : 04-11-2024
-New Attempt : 07-11-2024
+Date created : 19-12-2024
+New attempt : 22-12-2024
 """
 
 from collections import deque
@@ -16,23 +16,9 @@ class TreeNode:
 
 class Solution:
     def diameterOfBinaryTree(self, root: TreeNode | None) -> int:
-
-        self.res = 0
-
-        def dfs(curr):
-            if not curr:
-                return 0
-
-            left = dfs(curr.left)
-            right = dfs(curr.right)
-
-            self.res = max(self.res, left + right)
-
-            return max(left, right) + 1
-
-        dfs(root)
-        return self.res
-
+        # dfs
+        return
+    
 
 def arrToTree(arr):
     if not arr:

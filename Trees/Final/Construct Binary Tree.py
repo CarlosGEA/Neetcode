@@ -1,10 +1,8 @@
 """
-Difficulty : Easy 
-Date created : 04-11-2024
-New Attempt : 07-11-2024
+Difficulty : Medium
+Date created : 07-11-2024
+New attempt : 13-11-2024
 """
-
-from collections import deque
 
 
 class TreeNode:
@@ -15,23 +13,16 @@ class TreeNode:
 
 
 class Solution:
-    def diameterOfBinaryTree(self, root: TreeNode | None) -> int:
+    def buildTree(self, preorder: list[int], inorder: list[int]) -> TreeNode | None:
+        if not preorder or not inorder:
+            return None
 
-        self.res = 0
+        root = TreeNode(preorder[0])
+        pos = inorder.index(preorder[0])
+        root.left = self.buildTree(preorder[1 : pos + 1], inorder[:pos])
+        root.right = self.buildTree(preorder[pos + 1 :], inorder[pos + 1 :])
 
-        def dfs(curr):
-            if not curr:
-                return 0
-
-            left = dfs(curr.left)
-            right = dfs(curr.right)
-
-            self.res = max(self.res, left + right)
-
-            return max(left, right) + 1
-
-        dfs(root)
-        return self.res
+        return root
 
 
 def arrToTree(arr):
@@ -85,14 +76,13 @@ def main():
 
     solution = Solution()
 
-    root = [1, None, 2, 3, 4, 5]
-    print(f"The diameter of the binary tree is {solution.diameterOfBinaryTree(arrToTree(root))}")
+    preorder = [1, 2, 3, 4]
+    inorder = [2, 1, 3, 4]
+    print(f"The tree built is {treeToArr(solution.buildTree(preorder, inorder))}")
 
-    root = [1, 2, 3]
-    print(f"The diameter of the binary tree is {solution.diameterOfBinaryTree(arrToTree(root))}")
-
-    root = [1, 4, 3, 2]
-    print(f"The diameter of the binary tree is {solution.diameterOfBinaryTree(arrToTree(root))}")
+    preorder = [1]
+    inorder = [1]
+    print(f"The tree built is {treeToArr(solution.buildTree(preorder, inorder))}")
 
     return None
 
