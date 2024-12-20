@@ -1,6 +1,6 @@
 """
 Difficulty : Hard
-Date created : 21-11-2024
+Date created : 20-12-2024
 """
 
 
@@ -17,18 +17,16 @@ class Solution:
         res = float("-inf")
 
         def dfs(node):
+            nonlocal res
             if not node:
                 return 0
 
-            cur = node.val
+            left = max(dfs(node.left), 0)
+            right = max(dfs(node.right), 0)
 
-            left_val = dfs(node.left)
-            right_val = dfs(node.right)
+            res = max(res, node.val + left + right)
 
-            nonlocal res
-            res = max(res, cur + left_val + right_val)
-
-            return max(0, cur, cur + max(left_val, right_val))
+            return node.val + max(left, right)
 
         dfs(root)
         return res

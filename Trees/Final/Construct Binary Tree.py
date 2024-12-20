@@ -1,7 +1,6 @@
 """
 Difficulty : Medium
-Date created : 07-11-2024
-New attempt : 13-11-2024
+Date created : 20-12-2024
 """
 
 
@@ -16,11 +15,11 @@ class Solution:
     def buildTree(self, preorder: list[int], inorder: list[int]) -> TreeNode | None:
         if not preorder or not inorder:
             return None
-
         root = TreeNode(preorder[0])
-        pos = inorder.index(preorder[0])
-        root.left = self.buildTree(preorder[1 : pos + 1], inorder[:pos])
-        root.right = self.buildTree(preorder[pos + 1 :], inorder[pos + 1 :])
+        mid = inorder.index(preorder[0])
+
+        root.left = self.buildTree(preorder[1 : mid + 1], inorder[0:mid])
+        root.right = self.buildTree(preorder[mid + 1 :], inorder[mid + 1 :])
 
         return root
 

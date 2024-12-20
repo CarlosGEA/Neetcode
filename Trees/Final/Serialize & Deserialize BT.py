@@ -1,6 +1,6 @@
 """
 Difficulty : Hard
-Date created : 03-12-2024
+Date created : 20-12-2024
 """
 
 
@@ -15,51 +15,38 @@ class Codec:
 
     def serialize(self, root: TreeNode | None) -> str:
 
-        arr = []
-        stack = [root]
+        res = []
 
-        while stack:
-            node = stack.pop(0)
-            if node:
-                arr.append(str(node.val))
-                stack.append(node.left)
-                stack.append(node.right)
-            else:
-                arr.append("?")
+        def dfs(node):
+            if not node:
+                res.append("?")
+                return
 
-        while arr and arr[-1] == "?":
-            arr.pop()
+            res.append(str(node.val))
+            dfs(node.left)
+            dfs(node.right)
+            return
 
-        arr = "#".join(arr)
-
-        return arr
+        dfs(root)
+        return "#".join(res)
 
     def deserialize(self, data: str) -> TreeNode | None:
-        if not data:
-            return None
+        vals = data.split("#")
+        i = 0
 
-        nodes = []
-        arr = data.split("#")
+        def dfs():
+            nonlocal i
+            if vals[i] == "?":
+                i += 1
+                return None
 
-        val = arr.pop(0)
-        root = TreeNode(int(val))
-        nodes.append(root)
+            root = TreeNode(int(vals[i]))
+            i += 1
+            root.left = dfs()
+            root.right = dfs()
+            return root
 
-        while len(arr) > 0:
-            curr = nodes.pop(0)
-
-            left_val = arr.pop(0)
-            if left_val != "?":
-                curr.left = TreeNode(int(left_val))
-                nodes.append(curr.left)
-
-            if len(arr) > 0:
-                right_val = arr.pop(0)
-                if right_val != "?":
-                    curr.right = TreeNode(int(right_val))
-                    nodes.append(curr.right)
-
-        return root
+        return dfs()
 
 
 def arrToTree(arr):
@@ -114,12 +101,12 @@ def main():
     decode = Codec()
     root = [1, 2, 3, None, None, 4, 5]
     serialized = decode.serialize(arrToTree(root))
-    print(f"The serialized tree is :{serialized}")
+    print(f"The serialized tree is : {serialized}")
     print(f"The deserialized tree is {treeToArr(decode.deserialize(serialized))}")
 
     root = []
     serialized = decode.serialize(arrToTree(root))
-    print(f"The serialized tree is :{serialized}")
+    print(f"The serialized tree is : {serialized}")
     print(f"The deserialized tree is {treeToArr(decode.deserialize(serialized))}")
 
     return None
