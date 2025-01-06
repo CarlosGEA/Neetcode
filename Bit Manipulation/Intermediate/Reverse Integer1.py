@@ -1,27 +1,16 @@
 """
 Difficulty : Medium
-Date created : 18-12-2024
+Date created : 06-01-2025
+New attempt : -01-2025
 """
+
+import math
 
 
 class Solution:
     def reverse(self, x: int) -> int:
-        MIN = - (2 ** 31)
-        MAX = (2 ** 31) - 1
 
-        neg = False
-        x_str = str(x)
-        if x < 0:
-            neg = True
-            x_str = x_str[1:]
-
-        x = int(x_str[::-1]) 
-        x *= -1 if neg else 1
-        
-        if x < MIN or x > MAX:
-            return 0
-
-        return x
+        return
 
 
 def main():

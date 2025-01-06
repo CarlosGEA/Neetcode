@@ -1,15 +1,14 @@
 """
 Difficulty : Easy
-Date created : 17-12-2024
+Date created : 21-12-2024
+New attempt : 06-01-2025
 """
 
 
 class Solution:
     def reverseBits(self, n: int) -> int:
-        rev_str_n = str(format(n, '032b'))[::-1]
-        print(rev_str_n)
 
-        return int(rev_str_n, 2)
+        return
 
 
 def main():

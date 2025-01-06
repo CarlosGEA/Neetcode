@@ -1,18 +1,14 @@
 """
 Difficulty : Medium
-Date created : 18-12-2024
+Date created : 21-12-2024
+New attempt : 06-01-2025
+New attempt : -01-2025
 """
 
 
 class Solution:
     def getSum(self, a: int, b: int) -> int:
-        # Can't use + or - operators
-
-        if b == 0:
-            return a
-        
-        carry = (a & b) << 1
-        return self.getSum(a ^ b, carry)
+        return
       
 
 def main():
