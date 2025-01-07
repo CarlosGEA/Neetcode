@@ -1,26 +1,13 @@
 """
 Difficulty : Medium
 Date created : 12-12-2024
-New attempt : 16-12-2024
-New attempt : 19-12-2024
-New attempt : 07-01-2025
 """
 
 
 class Solution:
     def eraseOverlapIntervals(self, intervals: list[list[int]]) -> int:
 
-        intervals.sort(key=lambda i: i[1])
-        end = intervals[0][1]
-
-        res = 0
-
-        for i in range(1, len(intervals)):
-            if end > intervals[1][0]:
-                res += 1
-            else:
-                end = intervals[i][1]
-        return res
+        return
 
 
 def main():

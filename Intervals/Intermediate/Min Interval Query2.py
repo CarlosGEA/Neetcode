@@ -1,6 +1,7 @@
 """
 Difficulty : Hard
-Date created : -12-2024
+Date created : 07-01-2025
+New attempt : -01-2025
 """
 
 import heapq
@@ -8,7 +9,7 @@ import heapq
 
 class Solution:
     def minInterval(self, intervals: list[list[int]], queries: list[int]) -> list[int]:
-
+        
         return
 
 def main():
