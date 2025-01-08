@@ -3,9 +3,6 @@ Difficulty : Medium
 Date created : 19-12-2024
 """
 
-from collections import deque
-from collections import defaultdict
-
 
 class TreeNode:
     def __init__(self, val=0, left=None, right=None):

@@ -1,7 +1,7 @@
 """
 Difficulty : Medium
 Date created : 20-12-2024
-New attempt : 23-12-2024
+New attempt : 08-01-2025
 """
 
 
@@ -62,17 +62,23 @@ def treeToArr(root):
 class Solution:
     def kthSmallest(self, root: TreeNode | None, k: int) -> int:
 
-        arr = []
-        stack = [root]
+        res = 0
 
-        while stack:
-            node = stack.pop(0)
-            if node:
-                arr.append(node.val)
-                stack.append(node.left)
-                stack.append(node.right)
+        def dfs(node):
+            nonlocal k, res
 
-        return sorted(arr)[k - 1]
+            if not node:
+                return None
+
+            dfs(node.left)
+            k -= 1
+            if not k:
+                res = node.val
+                return
+            dfs(node.right)
+
+        dfs(root)
+        return res
 
 
 def main():
