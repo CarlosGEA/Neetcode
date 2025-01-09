@@ -1,7 +1,7 @@
 """
 Difficulty : 
 Date created : 06-01-2025
-New attempt : -01-2025
+New attempt : 09-01-2025
 """
 
 
@@ -9,7 +9,15 @@ class Solution:
     def canJump(self, nums: list[int]) -> bool:
         # can improve complexity to O(n)
 
-        return
+        goal = len(nums) - 1
+
+        for i in range(len(nums) - 2, -1, -1):
+
+            if i + nums[i] >= goal:
+                goal = i
+
+        return goal == 0
+
 
 def main():
 

@@ -2,13 +2,19 @@
 Difficulty : Easy
 Date created : 21-12-2024
 New attempt : 06-01-2025
+New attempt : 09-01-2025
 """
 
 
 class Solution:
     def reverseBits(self, n: int) -> int:
+        res = 0
 
-        return
+        for i in range(32):
+            digit = (n >> i) & 1
+            res += digit << (31 - i)
+
+        return res
 
 
 def main():
