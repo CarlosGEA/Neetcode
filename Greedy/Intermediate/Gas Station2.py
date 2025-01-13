@@ -1,13 +1,22 @@
 """
 Difficulty : Medium
-Date created : -01-2025
+Date created : 13-01-2025
 """
 
 
 class Solution:
     def canCompleteCircuit(self, gas: list[int], cost: list[int]) -> int:
-        # make O(n) - two pointers then greedy
-        return
+        if sum(gas) < sum(cost):
+            return -1
+
+        cur = tot = 0
+        for i in range(len(cost)):
+            tot += gas[i] - cost[i]
+            if tot < 0:
+                tot = 0
+                cur = i + 1
+
+        return cur
 
 
 def main():
