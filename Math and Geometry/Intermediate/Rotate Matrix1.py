@@ -1,32 +1,25 @@
 """
 Difficulty : Medium
-Date created : -01-2025
+Date created : 14-01-2025
 """
 
 
 class Solution:
     def rotate(self, matrix: list[list[int]]) -> None:
+        l = 0
+        r = len(matrix) - 1
+        while l < r:
+            for i in range(r - l):
+                t = l
+                b = r
+                dummy = matrix[t][l + i]
+                matrix[t][l + i] = matrix[b - i][l]
+                matrix[b - i][l] = matrix[b][r - i]
+                matrix[b][r - i] = matrix[t + i][r]
+                matrix[t + i][r] = dummy
 
-        LENGTH = len(matrix)
-
-        def recur(n):
-
-            new_length = LENGTH - (2 * n)
-            for i in range(new_length - 1):
-
-                dummy = matrix[n][n + i]
-
-                matrix[n][n + i] = matrix[n + new_length - 1 - i][n]
-                matrix[n + new_length - 1 - i][n] = matrix[n + new_length - 1][
-                    n + new_length - 1 - i
-                ]
-                matrix[n + new_length - 1][n + new_length - 1 - i] = matrix[n + i][
-                    n + new_length - 1
-                ]
-                matrix[n + i][n + new_length - 1] = dummy
-
-        for num in range(LENGTH // 2):
-            recur(num)
+            l += 1
+            r -= 1
 
         return matrix
         return None
@@ -36,8 +29,8 @@ def main():
 
     solution = Solution()
 
-    matrix = [[1, 2], [3, 4]]
-    print(f"The rotated matrix is now {solution.rotate(matrix)}")
+    # matrix = [[1, 2], [3, 4]]
+    # print(f"The rotated matrix is now {solution.rotate(matrix)}")
 
     matrix = [[1, 2, 3], [4, 5, 6], [7, 8, 9]]
     print(f"The rotated matrix is now {solution.rotate(matrix)}")
