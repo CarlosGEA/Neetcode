@@ -1,5 +1,5 @@
 """
-Difficulty : 
+Difficulty : Medium
 Date created : 06-12-2024
 """
 

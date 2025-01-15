@@ -1,37 +1,40 @@
 """
 Difficulty : Medium
-Date created : 02-12-2024
-New attempt :
+Date created : 15-01-2025
 """
 
 
 class Solution:
     def validTree(self, n: int, edges: list[list[int]]) -> bool:
+        # make sure all nodes are seen in one traversal
+        adjDict = {i: [] for i in range(n)}
+        for e1, e2 in edges:
+            adjDict[e1].append(e2)
+            adjDict[e2].append(e1)
 
-        graphMap = {i: [] for i in range(n)}
+        visited = set()
+        seen = set()
 
-        for head, root in edges:
-            if head > root:
-                head, root = root, head
-            graphMap[head].append(root)
-
-        def dfs(node):
-            if node in seen:
+        def dfs(edge, prev):
+            if edge in seen:
                 return False
 
-            if graphMap[node] == []:
-                seen.add(node)
+            if edge in visited:
                 return True
 
-            seen.add(node)
-            for branch in graphMap[node]:
-                if not dfs(branch):
+            seen.add(edge)
+            for new_edge in adjDict[edge]:
+                if prev != new_edge and not dfs(new_edge, edge):
                     return False
-            graphMap[node] = []
+
+            seen.remove(edge)
+            visited.add(edge)
             return True
 
-        seen = set()
-        return dfs(0) and len(seen) == n
+        if not dfs(0, -1):
+            return False
+
+        return len(visited) == n
 
 
 def main():
