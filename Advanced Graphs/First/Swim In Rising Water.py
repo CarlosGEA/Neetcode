@@ -1,14 +1,39 @@
 """
 Difficulty : Hard
 Date created : 14-01-2025
-New attempt :
+New attempt : 17-01-2025
 """
+
+import heapq
 
 
 class Solution:
     def swimInWater(self, grid: list[list[int]]) -> int:
+        # use minHeap from start -> djikstra's algorithm
+        ROWS = len(grid)
+        COLS = len(grid[0])
 
-        return
+        seen = set()
+        queue = [[grid[0][0], 0, 0]]
+        target = grid[-1][-1]
+
+        def process(r, c, t):
+            if r < 0 or c < 0 or r >= ROWS or c >= COLS or grid[r][c] in seen:
+                return
+            seen.add(grid[r][c])
+            heapq.heappush(queue, [max(t, grid[r][c]), r, c])
+
+        while queue:
+            time, r, c = heapq.heappop(queue)
+
+            if grid[r][c] == target:
+                return time
+
+            process(r + 1, c, time)
+            process(r - 1, c, time)
+            process(r, c + 1, time)
+            process(r, c - 1, time)
+
 
 def main():
 

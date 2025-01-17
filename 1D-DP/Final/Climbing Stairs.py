@@ -1,6 +1,6 @@
 """
 Difficulty : Easy
-Date created : 29-11-2024
+Date created : 18-01-2025
 """
 
 
