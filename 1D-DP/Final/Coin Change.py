@@ -6,16 +6,15 @@ Date created : 18-01-2027
 
 class Solution:
     def coinChange(self, coins: list[int], amount: int) -> int:
+        res = [float("inf") for _ in range(amount + 1)]
+        res[0] = 0
 
-        dp = [float("inf")] * (amount + 1)
-        dp[0] = 0
+        for coin in coins:
+            for i in range(len(res)):
+                if i + coin <= amount:
+                    res[i + coin] = min(res[i + coin], res[i] + 1)
 
-        for i in range(len(dp)):
-            for c in coins:
-                if i + c <= amount:
-                    dp[i + c] = min(dp[i] + 1, dp[i + c])
-
-        return dp[amount] if dp[amount] != float("inf") else -1
+        return res[amount] if res[amount] != float("inf") else -1
 
 
 def main():

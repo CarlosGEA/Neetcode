@@ -6,26 +6,18 @@ Date created : 18-01-2025
 
 class Solution:
     def numDecodings(self, s: str) -> int:
+        res = [0] * len(s)
+        res.append(1)
 
-        res = 0
-
-        def dfs(i):
-            nonlocal res
-            if i == len(s):
-                res += 1
-                return 1
-
+        for i in range(len(res) - 2, -1, -1):
             if s[i] == "0":
-                return
+                continue
 
-            dfs(i + 1)
-            
-            if i + 1 < len(s) and (s[i] == "1" or (s[i] == "2" and s[i + 1] in "0123456")):
-                dfs(i + 2)
-            return
+            res[i] += res[i + 1]
+            if i + 1 < len(s) and (s[i] == "1" or s[i] == "2" and s[i + 1] in "0123456"):
+                res[i] += res[i + 2]
 
-        dfs(0)
-        return res
+        return res[0]
 
 
 def main():

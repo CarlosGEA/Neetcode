@@ -6,20 +6,16 @@ Date created : 18-01-2025
 
 class Solution:
     def maxProduct(self, nums: list[int]) -> int:
-
+        curMin = 1
+        curMax = 1
         res = float("-inf")
 
-        def dfs(cur, i):
-            nonlocal res
-            if i == len(nums):
-                return
-            res = max(res, cur * nums[i], nums[i])
-            dfs(cur * nums[i], i + 1)
-            dfs(nums[i], i + 1)
+        for num in nums:
+            tmp = curMin
+            curMin = min(num, curMax * num, curMin * num)
+            curMax = max(num, curMax * num, tmp * num)
+            res = max(res, curMax)
 
-            return
-
-        dfs(1, 0)
         return res
 
 

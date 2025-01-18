@@ -6,15 +6,14 @@ Date created : 18-01-2025
 
 class Solution:
     def climbStairs(self, n: int) -> int:
-        pos = [None] * (n + 1)
+        frst = scnd = 1
 
-        pos[0] = 1
-        pos[1] = 1
+        for _ in range(n - 1):
+            tmp = scnd
+            scnd += frst
+            frst = tmp
 
-        for i in range(2, n + 1):
-            pos[i] = pos[i - 1] + pos[i - 2]
-
-        return pos[-1]
+        return scnd
 
 
 def main():

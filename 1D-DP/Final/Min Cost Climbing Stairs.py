@@ -6,16 +6,10 @@ Date created : 18-01-2025
 
 class Solution:
     def minCostClimbingStairs(self, cost: list[int]) -> int:
-        cost.append(0)
+        for i in range(len(cost) - 3, -1, -1):
+            cost[i] += min(cost[i + 1], cost[i + 2])
 
-        runcost = [None] * len(cost)
-        runcost[0] = cost[0]
-        runcost[1] = cost[1]
-
-        for i in range(2, len(runcost)):
-            runcost[i] = cost[i] + min(runcost[i - 1], runcost[i - 2])
-
-        return runcost[-1]
+        return min(cost[0], cost[1])
 
 
 def main():

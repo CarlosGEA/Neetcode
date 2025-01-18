@@ -6,27 +6,15 @@ Date created : 18-01-2025
 
 class Solution:
     def wordBreak(self, s: str, wordDict: list[str]) -> bool:
-        # splits = []
-        # cur = []
+        res = [False] * len(s)
+        res.append(True)
 
-        smallest = len(min(wordDict, key=len))
+        for i in range(len(s) - 1, -1, -1):
+            for word in wordDict:
+                if (i + len(word)) <= len(s) and s[i : i + len(word)] == word:
+                    res[i] |= res[i + len(word)]
 
-        def dfs(i):
-            if i == len(s):
-                # splits.append(cur.copy())
-                return True
-
-            for j in range(i + smallest - 1, len(s)):
-                if s[i : j + 1] in wordDict:
-                    # cur.append(s[i : j + 1])
-                    if dfs(j + 1):
-                        return True
-                    # cur.pop()
-
-            return False
-
-        return dfs(0)
-        # return len(splits) != 0
+        return res[0]
 
 
 def main():
@@ -44,6 +32,11 @@ def main():
     s = "catsincars"
     wordDict = ["cats", "cat", "sin", "in", "car"]
     print(f"The string can be split into dictionary values : {solution.wordBreak(s, wordDict)}")
+
+    s="abcd"
+    wordDict=["a","abc","b","cd"]
+    print(f"The string can be split into dictionary values : {solution.wordBreak(s, wordDict)}")
+
 
     return None
 

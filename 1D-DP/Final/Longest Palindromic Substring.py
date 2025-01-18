@@ -6,26 +6,31 @@ Date created : 18-01-2025
 
 class Solution:
     def longestPalindrome(self, s: str) -> str:
+        # exxpand outwards
 
-        length = 0
-        longest = ""
+        res = ""
+        maxlen = 0
 
         for i in range(len(s)):
-            for j in range(i, len(s)):
-                if j - i + 1 > length and self.isPal(s, i, j):
-                    longest = s[i : j + 1]
-                    length = j - i + 1
+            l = i
+            r = i
+            while l >= 0 and r < len(s) and s[l] == s[r]:
+                if r - l + 1 > maxlen:
+                    res = s[l : r + 1]
+                    maxlen = r - l + 1
+                l -= 1
+                r += 1
 
-        return longest
+            l = i
+            r = i + 1
+            while l >= 0 and r < len(s) and s[l] == s[r]:
+                if r - l + 1 > maxlen:
+                    res = s[l : r + 1]
+                    maxlen = r - l + 1
+                l -= 1
+                r += 1
 
-    def isPal(self, s, i, j):
-
-        while i < j:
-            if s[i] != s[j]:
-                return False
-            i += 1
-            j -= 1
-        return True
+        return res
 
 
 def main():

@@ -6,7 +6,6 @@ Date created : 18-01-2025
 
 class Solution:
     def rob(self, nums: list[int]) -> int:
-
         nums.append(0)
         for i in range(len(nums) - 4, -1, -1):
             nums[i] += max(nums[i + 2], nums[i + 3])

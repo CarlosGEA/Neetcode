@@ -6,24 +6,22 @@ Date created : 18-01-2025
 
 class Solution:
     def canPartition(self, nums: list[int]) -> bool:
-        num_sum = sum(nums)
-        if num_sum % 2 != 0:
+        if sum(nums) % 2 != 0:
             return False
 
-        half = num_sum / 2
-        nums.sort(reverse=True)
+        half = sum(nums) // 2
+        poss = {0}
+        for num in nums:
+            dummy = poss.copy()
 
-        def dfs(i, cur):
-            if cur == half:
-                return True
+            for n in poss:
+                if n + num == half:
+                    return True
+                elif n + num <= half:
+                    dummy.add(n + num)
+            poss = dummy
 
-            for j in range(i, len(nums)):
-                if cur + nums[j] <= half:
-                    return dfs(j + 1, cur + nums[j])
-
-            return False
-
-        return dfs(0, 0)
+        return False
 
 
 def main():
