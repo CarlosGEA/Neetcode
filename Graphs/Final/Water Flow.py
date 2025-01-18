@@ -7,71 +7,41 @@ New attempt : 18-01-2025
 
 class Solution:
     def pacificAtlantic(self, heights: list[list[int]]) -> list[list[int]]:
-
+        # do dfs but similar logic, add if its valid idx + value and hasn't been seen
+        # dfs call has 4 vals, r, c ,prevHeight, visit
         ROWS = len(heights)
         COLS = len(heights[0])
-        res = []
-        seenA = set()
-        seenP = set()
 
-        def reachAtl(r, c, prev_h):
+        pac = set()
+        atl = set()
 
+        def dfs(r, c, prevHeight, visit):
             if (
                 r < 0
                 or c < 0
                 or r == ROWS
                 or c == COLS
-                or heights[r][c] > prev_h
-                or (r, c) in seenA
+                or heights[r][c] < prevHeight
+                or (r, c) in visit
             ):
-                return False
+                return
 
-            elif (
-                c == COLS - 1
-                and heights[r][c] <= prev_h
-                or r == ROWS - 1
-                and heights[r][c] <= prev_h
-            ):
-                return True
+            visit.add((r, c))
+            dfs(r + 1, c, heights[r][c], visit)
+            dfs(r - 1, c, heights[r][c], visit)
+            dfs(r, c + 1, heights[r][c], visit)
+            dfs(r, c - 1, heights[r][c], visit)
+            return
 
-            seenA.add((r, c))
-            ans = (
-                reachAtl(r + 1, c, heights[r][c])
-                or reachAtl(r, c + 1, heights[r][c])
-                or reachAtl(r - 1, c, heights[r][c])
-                or reachAtl(r, c - 1, heights[r][c])
-            )
-            seenA.remove((r, c))
+        for row in range(ROWS):
+            dfs(row, 0, 0, pac)
+            dfs(row, COLS - 1, 0, atl)
 
-            return ans
+        for col in range(COLS):
+            dfs(0, col, 0, pac)
+            dfs(ROWS - 1, col, 0, atl)
 
-        def reachPac(r, c, prev_h):
-
-            if r < 0 or c < 0 or r == ROWS or c == COLS or heights[r][c] > prev_h or (r, c) in seenP:
-                return False
-
-            elif c == 0 and heights[r][c] <= prev_h or r == 0 and heights[r][c] <= prev_h:
-                return True
-
-            seenP.add((r, c))
-            ans = (
-                reachPac(r - 1, c, heights[r][c])
-                or reachPac(r, c - 1, heights[r][c])
-                or reachPac(r + 1, c, heights[r][c])
-                or reachPac(r, c + 1, heights[r][c])
-            )
-
-            seenP.remove((r, c))
-
-            return ans
-
-        for r in range(ROWS):
-            for c in range(COLS):
-
-                if reachAtl(r, c, float("inf")) and reachPac(r, c, float("inf")):
-                    res.append([r, c])
-
-        return res
+        return [list(i) for i in atl.intersection(pac)]
 
 
 def main():
