@@ -9,7 +9,24 @@ from collections import defaultdict
 
 class Solution:
     def findItinerary(self, tickets: list[list[str]]) -> list[str]:
-        return
+        adj = defaultdict(list)
+        tickets.sort(reverse=True)
+        for src, dst in tickets:
+            adj[src].append(dst)
+
+        queue = ["JFK"]
+        res = []
+        while queue:
+            cur = queue[-1]
+
+            if adj[cur]:
+                queue.append(adj[cur].pop())
+
+            else:
+                res.append(queue.pop())
+
+        return res[::-1]
+
 
 def main():
 
