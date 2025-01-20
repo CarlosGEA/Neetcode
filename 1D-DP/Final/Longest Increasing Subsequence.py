@@ -1,22 +1,13 @@
 """
 Difficulty : Medium
 Date created : 18-01-2025
-Next attempt : ??-01-2025
+Next attempt : 21-01-2025
 """
 
 
 class Solution:
     def lengthOfLIS(self, nums: list[int]) -> int:
-        res = [1] * len(nums)
-
-        for i in range(len(nums) - 2, -1, -1):
-            if nums[i] < nums[i + 1]:
-                res[i] += res[i + 1]
-            else:
-                res[i] = res[i + 1]
-
-        return max(res)
-
+        return
 
 def main():
 
