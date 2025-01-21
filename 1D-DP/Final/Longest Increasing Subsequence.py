@@ -7,7 +7,17 @@ Next attempt : 21-01-2025
 
 class Solution:
     def lengthOfLIS(self, nums: list[int]) -> int:
-        return
+        # doulbe for
+
+        res = [1] * len(nums)
+
+        for i in range(len(nums)):
+            for j in range(i + 1, len(nums)):
+                if nums[i] < nums[j]:
+                    res[j] = max(res[j], res[i] + 1)
+
+        return max(res)
+
 
 def main():
 
