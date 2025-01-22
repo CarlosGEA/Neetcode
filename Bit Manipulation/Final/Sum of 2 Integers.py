@@ -7,8 +7,16 @@ New attempt : 22-01-2025
 
 class Solution:
     def getSum(self, a: int, b: int) -> int:
+        mask = 0xFFFFFFFF
+        maxInt = 0x7FFFFFFF
 
-        return
+        while b:
+            carry = ((a & b) << 1) & mask
+            a = (a ^ b) & mask
+            b = carry 
+
+        return a if a < maxInt else ~(a^mask)
+
 
 def main():
 
@@ -17,8 +25,8 @@ def main():
     b = 1
     print(f"The sum of {a} and {b} is {solution.getSum(a,b)}")
 
-    a = 4
-    b = 7
+    a = 4 # 100
+    b = 7 # 111
     print(f"The sum of {a} and {b} is {solution.getSum(a,b)}")
 
     return None
