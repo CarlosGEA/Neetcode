@@ -7,14 +7,17 @@ New attempt : 27-01-2025
 
 class Solution:
     def jump(self, nums: list[int]) -> int:
-        # good - maybe can optimize using l, r ??
+        # left and right#
         res = 0
-        cur = 0
-        while cur < len(nums) - 1:
-            for j in range(cur, -1, -1):
-                if j + nums[j] > cur:
-                    cur = j + nums[j]
-                    res += 1
+        l = r = 0
+        while r < len(nums) - 1:
+
+            for i in range(l, r + 1):
+                if nums[i] + i > r:
+                    l = r + 1
+                    r = nums[i] + i
+
+            res += 1
 
         return res
 

@@ -18,6 +18,17 @@ class Solution:
 
 def main():
 
+    solution = Solution()
+
+    num1 = "3"
+    num2 = "4"
+
+    print(f"The product of {num1} and {num2} is {solution.multiply(num1, num2)}")
+
+    num1 = "111"
+    num2 = "222"
+    print(f"The product of {num1} and {num2} is {solution.multiply(num1, num2)}")
+
     return None
 
 
