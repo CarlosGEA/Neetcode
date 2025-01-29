@@ -2,7 +2,7 @@
 Difficulty : Hard
 Date created : 22-01-2025
 New attempt : 26-01-2025
-New attempt : ??-01-2025
+New attempt : 29-01-2025
 """
 
 # If you burst the ith balloon, you will receive nums[i - 1] * nums[i] * nums[i + 1] coins.
@@ -11,7 +11,33 @@ New attempt : ??-01-2025
 
 class Solution:
     def maxCoins(self, nums: list[int]) -> int:
-        return
+        # left and right from where we are popping last, calculate current coins
+
+        nums = [1] + nums + [1]
+
+        memo = {}
+
+        def dfs(l, r):
+
+            if l > r:
+                return 0
+
+            if (l, r) in memo:
+                return memo[(l, r)]
+
+            res = 0
+            for i in range(l, r + 1):
+                res = max(
+                    res,
+                    (nums[l - 1] * nums[i] * nums[r + 1])
+                    + dfs(l, i - 1)
+                    + dfs(i + 1, r),
+                )
+
+            memo[(l, r)] = res
+            return res
+
+        return dfs(1, len(nums) - 2)
 
 
 def main():
