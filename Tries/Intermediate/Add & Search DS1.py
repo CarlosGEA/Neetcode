@@ -1,27 +1,48 @@
 """
 Difficulty : Medium
-Date created : 23-01-2025
+Date created : 30-01-2025
 """
+
+
+class TrieNode:
+    def __init__(self):
+        self.children = {}
+        self.endWord = False
 
 
 class WordDictionary:
 
     def __init__(self):
-        # dict with pattern and words within dict a set
-        #
-
-        return
+        self.root = TrieNode()
 
     def addWord(self, word: str) -> None:
-        # simple add word
-
-        return None
+        cur = self.root
+        for w in word:
+            if w not in cur.children:
+                cur.children[w] = TrieNode()
+            cur = cur.children[w]
+        cur.endWord = True
 
     def search(self, word: str) -> bool:
-        # form pattern
-        # return first instance of true?
 
-        return False
+        def dfs(cur, i):
+
+            for j in range(i, len(word)):
+                letter = word[j]
+
+                if letter == ".":
+                    for potential in cur.children:
+                        if dfs(cur.children[potential], j + 1):
+                            return True
+                    return False
+
+                elif letter not in cur.children:
+                    return False
+                cur = cur.children[letter]
+
+            return cur.endWord
+
+        return dfs(self.root, 0)
 
 
 def main():
